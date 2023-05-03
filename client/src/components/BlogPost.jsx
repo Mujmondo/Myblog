@@ -1,6 +1,6 @@
 const BlogPost = () => {
     return (
-        <div className="blogpost col-span-4 md:ps-20 max-w-[1200px]">
+        <div className="blogpost bg-white">
             <div className="cover mb-4">
                 <img src="https://marxcommunications.com/wp-content/uploads/2023/02/fe4aab9f654a6ce2/how-to-write-a-blog-post.jpeg"
                     className="w-100"
@@ -8,7 +8,7 @@ const BlogPost = () => {
                     alt="post cover"
                 />
             </div>
-            <div className="info">
+            <div className="info px-5">
                 <h4 className="text-4xl mb-3">I Traveled Most Weeks for a Month & This is What I Learned</h4>
                 <p className="inline-block text-lg py-2 border-b border-solid border-slate-300"><i>by <span className="text-[#2065b4]">Rachel Leist</span> on <span>April 29, 2020 </span></i></p>
                 {/* <hr className="my-4" /> */}
