@@ -4,8 +4,12 @@ const fs = require('fs')
 
 // get all the posts
 const getPosts = async (req, res) => {
-    const posts = await Posts.find({})
+    try{
+    const posts = await Posts.find({}).sort({createdAt: -1}).limit(20)
     res.status(200).json(posts)
+    } catch(error){
+        throw error
+    }
 }
 // create a new post
 const createPost = async (req, res) => {
@@ -23,14 +27,18 @@ const createPost = async (req, res) => {
     if(!newPath){
         throw Error ('Picture is required')
     }
-    const post = await Posts.create({
-        title,
-        summary,
-        picture: newPath,
-        content
-    })
-
-    res.status(200).json(post)
+    try{
+        const post = await Posts.create({
+            title,
+            summary,
+            picture: newPath,
+            content
+        })
+    
+        res.status(200).json(post)
+    } catch(error){
+        throw error
+    }
 }
 
 

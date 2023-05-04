@@ -1,20 +1,18 @@
 import { useState } from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import { useLogin } from '../hooks/useLogin';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const {isLoading, error, login} = useLogin();
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await fetch('http://localhost:4000/api/user/login', {
-            method: 'POST',
-            body: JSON.stringify({username, password}),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json()
-        console.log(json)
+        await login(username, password)
+        if(Response.ok){
+            navigate('/')
+        }
     }
 
     return (
@@ -35,7 +33,11 @@ const Login = () => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}/><br />
                     <p className='mb-2 text-slate-700'>Don't have account? <Link to='/signup' className='text-[#2065b4]'>Sign up</Link></p>
-                    <button className='bg-[#2065b4] w-full p-2 text-white'>Login</button>
+                    <button 
+                    className='bg-[#2065b4] w-full p-2 text-white'
+                    disabled={isLoading}
+                    >Login</button>
+                    {error && <div> { error } </div>}
                 </form>
             </div>
         </div>

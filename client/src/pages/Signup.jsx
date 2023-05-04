@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+    const navigate = useNavigate()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -14,7 +16,9 @@ const Signup = () => {
             }
         })
         const json = await response.json()
-        console.log(json)
+        if(Response.ok){
+            navigate('/login')
+        }
     }
     return (
         <div className="signup bg-white max-w-[550px] h-[450px] mx-auto flex justify-center items-center shadow-xl rounded-2xl my-10">

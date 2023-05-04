@@ -46,7 +46,7 @@ const CreatePost = () => {
     }
     return ( 
         <div className="create-post">
-           <div className="bg-white max-w-[750px] h-[450px] mx-auto flex justify-center items-center shadow-xl rounded-2xl my-10">
+           <div className="bg-white max-w-[750px] py-10 mx-auto flex justify-center items-center shadow-xl rounded-2xl my-10">
             <div className="">
                 <h1 className='text-2xl font-medium text-slate-600 text-center mb-4'>Create a new post</h1>
                 <form onSubmit={handleSubmit} className='w-[650px]'>
@@ -72,7 +72,6 @@ const CreatePost = () => {
                     theme="snow"
                     modules={modules}
                     formats={formats}
-                    className="mb-5"
                     />
                     <button className='bg-[#2065b4] w-full p-2 text-white'>Create post</button>
                 </form>

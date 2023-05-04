@@ -6,15 +6,25 @@ const createToken = (username, _id) => {
 
 }
 
+// get a user
+const getUser = (req, res) => {
+    const {token} = req.cookies
+    try{
+    const info = jwt.verify(token, process.env.SECRET)
+    res.status(200).json(info)
+} catch(err){
+    throw err
+}
+}
+
+
 const signupUser = async (req, res) => {
 
     const { username, password } = req.body
 
     try {
         const user = await User.signup(username, password)
-
-        const token = createToken(username, user._id)
-        res.status(200).json({ username, token})
+        res.status(200).json(username)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -27,7 +37,8 @@ const loginUser = async (req, res) => {
 
     try {
         const user = await User.login(username, password)
-        res.status(200).json({ user })
+        const token = createToken(username, user._id)
+        res.status(200).json({username, token})
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -35,4 +46,4 @@ const loginUser = async (req, res) => {
 }
 
 
-module.exports = { signupUser, loginUser }
+module.exports = { getUser, signupUser, loginUser }

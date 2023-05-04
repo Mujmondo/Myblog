@@ -2,7 +2,7 @@ const BlogPost = ({post}) => {
     return (
         <div className="blogpost bg-white">
             <div className="cover mb-4">
-                <img src={post.picture}
+                <img src={'http://localhost:4000/' + post.picture}
                     className="w-100"
                     width="100%"
                     alt="post cover"

@@ -3,7 +3,7 @@ import { BlogAuthor, BlogPost } from "../components";
 
 const PostsPage = () => {
     const [posts, setPosts] = useState([]);
-    console.log(typeof posts)
+
     useEffect(() => {
         const fetchPosts = async () => {
             const response = await fetch('http://localhost:4000/api/posts')
