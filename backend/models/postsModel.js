@@ -18,6 +18,10 @@ const postsSchema = new Schema({
         type: String,
         required: true
     },
+    author:{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }
 }, {timestamps: true})
 
 module.exports = mongoose.model('post', postsSchema)

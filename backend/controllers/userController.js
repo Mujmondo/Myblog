@@ -24,7 +24,7 @@ const signupUser = async (req, res) => {
 
     try {
         const user = await User.signup(username, password)
-        res.status(200).json(username)
+        res.status(200).json(user.username)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -37,13 +37,19 @@ const loginUser = async (req, res) => {
 
     try {
         const user = await User.login(username, password)
-        const token = createToken(username, user._id)
-        res.status(200).json({username, token})
+        const token = createToken(user.username, user._id)
+        res.status(200).cookie('token', token).json({username, token})
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
 
 }
 
+// logoutUser
+const logoutUser = (req, res) => {
+    res.cookie('token', '')
+    res.status(200).json('ok')
+}
 
-module.exports = { getUser, signupUser, loginUser }
+
+module.exports = { getUser, signupUser, loginUser, logoutUser }

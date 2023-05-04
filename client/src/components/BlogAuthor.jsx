@@ -1,4 +1,4 @@
-const BlogAuthor = () => {
+const BlogAuthor = ({post}) => {
     return ( 
         <div className="bg-white px-4 author text-center py-5">
             <div className="mx-auto text-center">
@@ -7,9 +7,9 @@ const BlogAuthor = () => {
             alt=""
             width={80}
             height={80} />
-            <p className="text-[#2065b4] text-sm font-medium mb-1">Karen Dominique</p>
+            <p className="text-[#2065b4] text-sm font-medium mb-1">{post.author.username}</p>
             <p className="text-slate-800 mb-2">Writer, Communicator, Storyteller</p>
-            <p className="text-slate-600">I am a millennial on a mission to serve others through grace and empathy. I tend to write about being present, personal growth, relationships, pain and all the other stuff they never taught you in school.</p>
+            <p className="text-slate-600 font-[monospace]">I am a millennial on a mission to serve others through grace and empathy. I tend to write about being present, personal growth, relationships, pain and all the other stuff they never taught you in school.</p>
             </div>
         </div>
      );

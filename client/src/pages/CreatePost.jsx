@@ -38,10 +38,11 @@ const CreatePost = () => {
         const response = await fetch('http://localhost:4000/api/posts/create', {
             method: 'POST',
             body: data,
+            credentials: 'include'
 
         })
         const json = await response.json()
-        navigate('/posts')
+        navigate('/')
         console.log(json)
     }
     return ( 
