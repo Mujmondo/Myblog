@@ -4,8 +4,11 @@ const { default: mongoose } = require('mongoose')
 require('dotenv').config()
 
 const userRoutes = require('./routes/user') 
+const postsRoutes = require('./routes/posts')
 
 const cors = require('cors')
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/'})
 
 const app = express()
 
@@ -20,7 +23,7 @@ app.get('/', (req, res, next) => {
 
 // routes
 app.use('/api/user', userRoutes)
-app.use('/api/posts', ()=>{})
+app.use('/api/posts', upload.single('file') , postsRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI).then(() => {
