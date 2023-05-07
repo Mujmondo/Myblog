@@ -1,3 +1,5 @@
 export { default as Navbar } from './Navbar'
 export { default as BlogPost } from './BlogPost'
 export { default as BlogAuthor } from './BlogAuthor'
+export { default as ProtectedRoute } from './ProtectedRoute'
+export { default as Loader } from './Loader'

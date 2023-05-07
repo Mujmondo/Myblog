@@ -21,7 +21,11 @@ const postsSchema = new Schema({
     author:{
         type: Schema.Types.ObjectId,
         ref: 'user'
+    },
+    category:{
+        type: Schema.Types.ObjectId,
+        ref: 'category'
     }
-}, {timestamps: true})
+}, {timestamps: true, })
 
 module.exports = mongoose.model('post', postsSchema)

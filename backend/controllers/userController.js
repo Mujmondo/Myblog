@@ -8,13 +8,13 @@ const createToken = (username, _id) => {
 
 // get a user
 const getUser = (req, res) => {
-    const {token} = req.cookies
-    try{
-    const info = jwt.verify(token, process.env.SECRET)
-    res.status(200).json(info)
-} catch(err){
-    throw err
-}
+    const { token } = req.cookies
+    try {
+        const info = jwt.verify(token, process.env.SECRET)
+        res.status(200).json(info)
+    } catch (err) {
+        throw err
+    }
 }
 
 
@@ -24,7 +24,8 @@ const signupUser = async (req, res) => {
 
     try {
         const user = await User.signup(username, password)
-        res.status(200).json(user.username)
+        const token = createToken(username, user._id)
+        res.status(200).cookie('token', token).json({ username, token })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -37,8 +38,8 @@ const loginUser = async (req, res) => {
 
     try {
         const user = await User.login(username, password)
-        const token = createToken(user.username, user._id)
-        res.status(200).cookie('token', token).json({username, token})
+        const token = createToken(username, user._id)
+        res.status(200).cookie('token', token).json({ username, token })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -47,8 +48,12 @@ const loginUser = async (req, res) => {
 
 // logoutUser
 const logoutUser = (req, res) => {
+    try{
     res.cookie('token', '')
     res.status(200).json('ok')
+    } catch(error){
+    res.status(400).json({error: error.message})
+    }
 }
 
 

@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const userRoutes = require('./routes/user') 
 const postsRoutes = require('./routes/posts')
+const categoriesRoutes = require('./routes/categories')
 
 const cors = require('cors')
 const multer = require('multer')
@@ -19,7 +20,7 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 app.use(cookieParser())
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
-app.get('/', (req, res, next) => {
+app.get('*', (req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
@@ -27,6 +28,7 @@ app.get('/', (req, res, next) => {
 // routes
 app.use('/api/user', userRoutes)
 app.use('/api/posts', upload.single('file') , postsRoutes)
+app.use('/api/categories', categoriesRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI).then(() => {
