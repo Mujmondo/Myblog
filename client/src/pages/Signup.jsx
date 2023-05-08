@@ -1,25 +1,18 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
-    const navigate = useNavigate()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const {isLoading, error, signup} = useSignup();
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-       const response = await fetch('http://localhost:4000/api/user/signup', {
-            method: 'POST',
-            body: JSON.stringify({username, password}),
-             headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        if(response.ok){
-            alert('Your account has been created successfully')
-            navigate('/login')
-        }
+        await signup(username, password)
     }
+
+
     return (
         <div className="signup bg-white dark:bg-slate-900 max-w-[550px] h-[450px] mx-auto flex justify-center items-center shadow-xl rounded-2xl my-10">
             <div className="signup-form">
@@ -39,11 +32,15 @@ const Signup = () => {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     /><br />
-                    <button className='bg-[#2065b4] w-full p-2 text-white'>Sign up</button>
+                    <button 
+                    className='bg-[#2065b4] w-full p-2 text-white'
+                    disabled={isLoading}
+                    >Sign up</button>
+                    {error && <div className='text-red-500 my-1 text-center'> { error } </div>}
                 </form>
             </div>
         </div>
     );
 }
-
+    
 export default Signup;

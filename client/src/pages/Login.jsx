@@ -5,14 +5,10 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const {isLoading, error, login} = useLogin();
-    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await login(username, password)
-        if(response.ok){
-            navigate('/')
-        }
+        await login(username, password)
     }
 
     return (
