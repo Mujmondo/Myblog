@@ -9,8 +9,8 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await login(username, password)
-        if(Response.ok){
+        const response = await login(username, password)
+        if(response.ok){
             navigate('/')
         }
     }

@@ -7,16 +7,9 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "./context/authContext";
 
 function App() {
-  const dark = localStorage.getItem('darkMode')
-  const [darkMode, setDarkMode] = useState(dark || false);
   const { user } = useContext(authContext)
-  localStorage.setItem('darkMode', darkMode)
-  
-  useEffect(() => {
-    dark === true? setDarkMode(true) : setDarkMode(false)
+  const [darkMode, setDarkMode] = useState(false);
     
-  }, []);
-  
   darkMode? document.body.classList.add('dark') : document.body.classList.remove('dark') 
   return (
     <div className="App bg-[#f0f0f0] dark:bg-slate-950 min-h-[100vh]">

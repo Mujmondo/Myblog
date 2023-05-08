@@ -8,14 +8,15 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await fetch('http://localhost:4000/api/user/signup', {
+       const response = await fetch('http://localhost:4000/api/user/signup', {
             method: 'POST',
             body: JSON.stringify({username, password}),
              headers: {
                 'Content-Type': 'application/json'
             }
         })
-        if(Response.ok){
+        if(response.ok){
+            alert('Your account has been created successfully')
             navigate('/login')
         }
     }
